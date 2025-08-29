@@ -1,71 +1,85 @@
-# Hack the Future | Horizon 2025, IIITV-ICD
+Collaborative Code Editor
 
-Welcome to **Hack the Future**, the 36-hour online hackathon organized by Coding Club DCodr as part of **Horizon 2025**, the annual technical fest of **IIITV-ICD**. This is your chance to collaborate, innovate, and build creative solutions to real-world problems.
+A real-time collaborative code editor built with React and Node.js, supporting codebase creation, owner-based authentication, live chat, and seamless collaboration. Powered by Yjs for conflict-free real-time synchronization and JWT for secure authentication.
 
-**Once the hackathon begins, please follow the instructions below carefully.**
+Features
 
----
+Codebase Creation & Management: Create and manage codebases with secure ownership.
 
-## **Instructions for Participants**
+Authentication: JWT-based secure login and access control.
 
-### ✅ **Step 1: Fork the Repository**
-1. Once problem statements are available. Click the **Fork** button at the top right corner to create a copy of this repository in your GitHub account.
-2. Clone the forked repository to your local machine using the command:
+Role-Based Access: Codebase owners can grant or restrict permissions.
 
-```bash
-git clone <your-forked-repo-link>
-```
+Real-Time Collaboration: Multiple users can edit simultaneously with conflict resolution powered by Yjs.
 
-### ✅ **Step 2: Select a Problem Statement**
-- Review the provided problem statements in the PROBLEMS.md.
-- Choose any one problem statement to work on.
-- Work directly on the `main` branch to ensure your final work is on the main branch, as the organizers will evaluate your project every 6 hours.
+Live Chat: Built-in communication channel for contributors within the same codebase.
 
-### ✅ **Step 3: Project Development**
-- Develop your project locally.
-- Commit your changes frequently with meaningful messages:
+Database Integration: MongoDB used for storing user data, authentication tokens, and codebase metadata.
 
-```bash
-git add .
-git commit -m "Initial commit with base project setup"
-```
+Tech Stack
+Frontend
 
-- Push your changes to your forked repository:
+React.js – UI development
 
-```bash
-git push origin main
-```
+Yjs – Real-time collaboration layer
 
-### ✅ **Step 4: Submission**
-1. Create a **Pull Request (PR)** to this repository before the hackathon ends.
-2. Your repository should contain:
-    - `README.md`: Instructions to run your project.
-    - Source code and necessary files.
-    - Documentation (if any).
-3. 4-5 Page PPT Presentation summarizing your solution to make it easier for judges to evaluate.
-   -  Slide 1: Title, team name, and problem statement.
-   -  Slide 2: Objective and solution overview.
-   -  Slide 3: Key features and technologies used.
-   -  Slide 4: solutions implemented.
-   -  Slide 5: Challenges faced.
+WebSockets / WebRTC – Communication
 
-⚠️ **Note:** Only PRs submitted before the hackathon deadline will be considered. Late submissions will not be accepted.
+Backend
 
----
+Node.js with Express.js – API and server logic
 
-## 🔍 **Evaluation Criteria**
-- **Innovation & Creativity:** Uniqueness and originality of the solution.
-- **Functionality & Implementation:** Proper execution and working functionality.
-- **Code Quality:** Clean, readable, and maintainable code.
-- **Presentation & Documentation:** Clear instructions and explanations.
+JWT – Authentication and authorization
 
----
+MongoDB – Database for users, sessions, and codebases
 
-## ⏱️ **Hackathon Timeline**
-- **Start:** [28/03/2025 5PM]
-- **End:** [30/03/2025 5AM]
-- **Duration:** 36 hours (continuous online mode)
+Additional Tools
 
----
+Socket.IO – Real-time messaging and synchronization
 
-🚀 **Good luck and happy hacking!** 🎯
+Bcrypt – Password hashing for security
+
+System Design
+1. Architecture
+
+The system follows a client-server model with real-time synchronization:
+
+Client (React + Yjs): Handles editor rendering, collaboration states, and live updates.
+
+Server (Node.js + Express): Manages authentication, API endpoints, codebase metadata, and chat integration.
+
+Database (MongoDB): Stores user credentials, JWTs, chat history, and codebase information.
+
+2. Workflow
+
+User Authentication
+
+Users log in via JWT authentication.
+
+Owner-based authentication controls who can access or modify a codebase.
+
+Code Collaboration
+
+Yjs CRDT ensures real-time sync of code edits.
+
+Conflict-free merges allow multiple contributors to edit the same file simultaneously.
+
+Live Chat
+
+Socket.IO enables real-time messaging inside a codebase session.
+
+Data Storage
+
+MongoDB holds user data, codebase metadata, and chat history.
+
+Code changes are synchronized across clients via Yjs documents rather than stored directly in MongoDB, reducing server load.
+
+
++-------------------+       +------------------+       +------------------+
+|   React Client    | <-->  |   Node.js API    | <-->  |     MongoDB      |
+|  (Code Editor +   |       | (Express + JWT)  |       | (User + Metadata)|
+|   Yjs + Socket.IO)|       |                  |       |                  |
++-------------------+       +------------------+       +------------------+
+         |                          |
+         |                          |
+         +---------- Live Chat ------+
