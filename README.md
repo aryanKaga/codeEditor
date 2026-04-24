@@ -83,3 +83,7 @@ Code changes are synchronized across clients via Yjs documents rather than store
          |                          |
          |                          |
          +---------- Live Chat ------+
+
+         <img width="1280" height="625" alt="image" src="https://github.com/user-attachments/assets/a4254ff1-5d7c-4e04-b7ff-3b97db5f7f2a" />
+<img width="1280" height="579" alt="image" src="https://github.com/user-attachments/assets/031587d1-90d8-4555-8350-f509cd5f6037" />
+
